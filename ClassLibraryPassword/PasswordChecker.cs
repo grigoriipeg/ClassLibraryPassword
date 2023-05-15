@@ -11,63 +11,171 @@ namespace ClassLibraryPassword
         private static Random rnd = new Random();
         public static bool ValidatePassword(string password)
         {
-            if (password.Length < 0 || password.Length > 20)
+            var number = false;
+            var symbols = false;
+            var upper = false;
+            var lower = false;
+
+            if (password.Length >= 8 && password.Length <= 20)
+            {
+                foreach (char c in password)
+                {
+                    if (Char.IsNumber(c))
+                    {
+                        number = true;
+                    }
+                    if (Char.IsLower(c))
+                    {
+                        lower = true;
+                    }
+                    if (Char.IsUpper(c))
+                    {
+                        upper = true;
+                    }
+                    if (Char.IsPunctuation(c) || Char.IsSeparator(c) || Char.IsSymbol(c))
+                    {
+                        symbols = true;
+                    }
+                }
+            }
+
+            if (number && symbols && lower && upper)
+            {
+                return true;
+            }
+            else
             {
                 return false;
             }
-            return true;
         }
 
-        static void Main(string[] args)
+        public static bool PasswordLength(string password)
         {
-            Console.Write("Введите размер массива: ");
-            int n = int.Parse(Console.ReadLine());
-            int[] mas = new int[n];
-            FillArray(mas);
-            Console.WriteLine("Исходный массив");
-            OutputArray(mas);
-            Console.WriteLine("\nСумма элементов");
-            SumArray(mas);
-            Console.WriteLine("\nСумма положительных элементов");
-            SumPlusArray(mas);
-            Console.ReadKey();
-        }
-
-        static void FillArray(int[] array)
-        {
-            Random random = new Random();
-            for (int i = 0; i < array.Length; i++)
+            if (password.Length >= 8 && password.Length <= 20)
+            {       
+                return true;
+            }
+            else
             {
-                array[i] = random.Next(-50, 50);
+                return false;
             }
         }
 
-        static void OutputArray(int[] array)
+        public static bool PasswordNumber(string password)
         {
-            for (int i = 0; i < array.Length; i++)
-            {
-                Console.Write(array[i] + " ");
+            var number = false;
+            if (password.Length >= 8 && password.Length <= 20)
+            {   
+                foreach (char c in password)
+                {
+                    if (Char.IsNumber(c))
+                    {
+                       number = true;
+                    }
+                }              
             }
-            Console.WriteLine();
+            return number;
         }
 
-        static void SumArray(int[] array)
+        public static bool PasswordSymbols(string password)
         {
-            int sum = array.Sum();
-            Console.WriteLine(sum);
-        }
-
-        static void SumPlusArray(int[] array)
-        {
-            int sum = 0;
-            for (int i = 0; i < array.Length; i++)
+            var symbol = false;
+            if (password.Length >= 8 && password.Length <= 20)
             {
-                if (array[i] > 0)
-                    sum += array[i];
+                foreach (char c in password)
+                {
+                    if (Char.IsPunctuation(c) || Char.IsSeparator(c) || Char.IsSymbol(c))
+                    {
+                        symbol = true;
+                    }
+                }
             }
-            Console.WriteLine(sum);
+            return symbol;
+        }
+
+        public static bool PasswordLower(string password)
+        {
+            var lower = false;
+            if (password.Length >= 8 && password.Length <= 20)
+            {
+                foreach (char c in password)
+                {
+                    if (Char.IsLower(c))
+                    {
+                        lower = true;
+                    }
+                }
+            }
+            return lower;
+        }
+
+        public static bool PasswordUpper(string password)
+        {
+            var upper = false;
+            if (password.Length >= 8 && password.Length <= 20)
+            {
+                foreach (char c in password)
+                {
+                    if (Char.IsUpper(c))
+                    {
+                        upper = true;
+                    }
+                }
+            }
+            return upper;
         }
 
 
+
+
+        /*static void Main(string[] args)
+    {
+        Console.Write("Введите размер массива: ");
+        int n = int.Parse(Console.ReadLine());
+        int[] mas = new int[n];
+        FillArray(mas);
+        Console.WriteLine("Исходный массив");
+        OutputArray(mas);
+        Console.WriteLine("\nСумма элементов");
+        SumArray(mas);
+        Console.WriteLine("\nСумма положительных элементов");
+        SumPlusArray(mas);
+        Console.ReadKey();
+    }
+
+    static void FillArray(int[] array)
+    {
+        Random random = new Random();
+        for (int i = 0; i < array.Length; i++)
+        {
+            array[i] = random.Next(-50, 50);
+        }
+    }
+
+    static void OutputArray(int[] array)
+    {
+        for (int i = 0; i < array.Length; i++)
+        {
+            Console.Write(array[i] + " ");
+        }
+        Console.WriteLine();
+    }
+
+    static void SumArray(int[] array)
+    {
+        int sum = array.Sum();
+        Console.WriteLine(sum);
+    }
+
+    static void SumPlusArray(int[] array)
+    {
+        int sum = 0;
+        for (int i = 0; i < array.Length; i++)
+        {
+            if (array[i] > 0)
+                sum += array[i];
+        }
+        Console.WriteLine(sum);
+    }*/
     }
 }
